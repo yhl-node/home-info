@@ -1,0 +1,23 @@
+{
+  "name": "home-info-node",
+  "version": "1.0.0",
+  "description": "home info",
+  "main": "index.js",
+  "dependencies": {
+    "request": "^2.81.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yhl-node/home-info.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yhl-node/home-info/issues"
+  },
+  "homepage": "https://github.com/yhl-node/home-info#readme"
+}
