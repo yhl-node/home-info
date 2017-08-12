@@ -1,5 +1,7 @@
 var config = {
-    BASE_URL : 'http://www.dzwyfwzx.com',
+    BASE_URL: 'http://www.dzwyfwzx.com',
 };
 
-module.exports = config;
+module.exports = {
+    config
+};
