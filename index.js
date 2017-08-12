@@ -1,11 +1,12 @@
 var request = require('request');
+var config = require('request');
 
 function getUser($user_id) {
     JSON.parse()
 }
 
 request.post({
-    url:'http://www.dzwyfwzx.com/Service/PhoneAPI.ashx',
+    url: '/Service/PhoneAPI.ashx',
     form: {
         action : 'getuser',
         UserID : 1549,
