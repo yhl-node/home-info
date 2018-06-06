@@ -4,11 +4,36 @@
   "description": "home info",
   "main": "index.js",
   "dependencies": {
-    "request": "^2.81.0"
+    "axios": "^0.18.0",
+    "config": "^1.29.2",
+    "dotenv": "^4.0.0",
+    "moment": "^2.22.1"
   },
-  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --forceExit",
+    "lint": "eslint src",
+    "start": "node src/index.js"
+  },
+  "jest": {
+    "collectCoverage": false,
+    "testMatch": [
+      "**/test/index.js"
+    ]
+  },
+  "standard": {
+    "env": [
+      "jest"
+    ]
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-standard": "^11.0.0-beta.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jest": "^21.15.2",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "jest": "^22.1.4"
   },
   "repository": {
     "type": "git",
