@@ -8,5 +8,10 @@
     "user": "MYSQL_USER",
     "pwd": "MYSQL_PWD",
     "db": "MYSQL_DB"
+  },
+  "interval": {
+    "user": "INTERVAL_USER",
+    "meter": "INTERVAL_METER",
+    "userMeter": "INTERVAL_USER_METER"
   }
 }

@@ -1,3 +1,9 @@
+/*
+ * @Author: yhl, yhl@1024hw.org
+ * @Date: 2018-08-11 23:10:51
+ * @Last Modified by:   yhl
+ * @Last Modified time: 2018-08-11 23:10:51
+ */
 const config = require('config')
 const Sequelize = require('sequelize')
 const Meter = require('../lib/meter')
@@ -7,17 +13,20 @@ const MeterInfoDB = require('../models/meters')(helper.db, Sequelize)
 const MeterLog = require('../models/meters_update_log')(helper.db, Sequelize)
 
 async function updateMeterInfo (mid) {
-  console.log(`update meter: ${mid}`)
-  let meter = new Meter(mid, config)
-  let [meterInfoDB, meterInfo] = await Promise.all([
-    MeterInfoDB.findOne({where: {'mid': mid}, attributes: ['mid']}),
-    meter.getMeterInfo()
-  ])
-  meterInfo && !meterInfo.lastReadTime && (meterInfo.lastReadTime = null)
-  await Promise.all([
-    helper.updateOrCreate(MeterInfoDB, meterInfoDB, meterInfo),
-    MeterLog.create(meterInfo)
-  ])
+  try {
+    let meter = new Meter(mid, config)
+    let [meterInfoDB, meterInfo] = await Promise.all([
+      MeterInfoDB.findOne({where: {'mid': mid}, attributes: ['mid']}),
+      meter.getMeterInfo()
+    ])
+    meterInfo && !meterInfo.lastReadTime && (meterInfo.lastReadTime = null)
+    await Promise.all([
+      helper.updateOrCreate(MeterInfoDB, meterInfoDB, meterInfo),
+      MeterLog.create(meterInfo)
+    ])
+  } catch (error) {
+    console.error(`update meter error: ${mid}`)
+  }
 }
 
 async function start () {
@@ -31,7 +40,7 @@ async function start () {
       try {
         await Promise.all(allPromise)
       } catch (err) {
-        // console.log(err)
+        console.error('update meter failed ! ! !')
       }
       allPromise = []
     } else {

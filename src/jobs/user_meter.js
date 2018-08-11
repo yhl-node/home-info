@@ -1,3 +1,9 @@
+/*
+ * @Author: yhl, yhl@1024hw.org
+ * @Date: 2018-08-11 23:10:47
+ * @Last Modified by:   yhl
+ * @Last Modified time: 2018-08-11 23:10:47
+ */
 const config = require('config')
 const Sequelize = require('sequelize')
 const User = require('../lib/user')
@@ -5,17 +11,19 @@ const helper = require('./helper')
 const MeterDB = require('../models/user_meters')(helper.db, Sequelize)
 
 async function updateUserMeter (uid) {
-  console.log(`update user meter: ${uid}`)
-  let user = new User(uid, config)
-  let userMeters = await user.getUserMeter()
-  if (userMeters) {
-    for (let index = 0; index < userMeters.length; index++) {
-      const userMeter = userMeters[index]
-      let meterDB = await MeterDB.findOne({ where: { 'mid': userMeter.mid }, attributes: ['mid'] })
-      await helper.updateOrCreate(MeterDB, meterDB, userMeter, {'user_id': uid})
+  try {
+    let user = new User(uid, config)
+    let userMeters = await user.getUserMeter()
+    if (userMeters) {
+      for (let index = 0; index < userMeters.length; index++) {
+        const userMeter = userMeters[index]
+        let meterDB = await MeterDB.findOne({ where: { 'mid': userMeter.mid }, attributes: ['mid'] })
+        await helper.updateOrCreate(MeterDB, meterDB, userMeter, {'user_id': uid})
+      }
     }
+  } catch (error) {
+    console.error(`update user meter error: ${uid}`)
   }
-  return true
 }
 
 async function start () {
@@ -28,7 +36,7 @@ async function start () {
       try {
         await Promise.all(allPromise)
       } catch (err) {
-        // console.log(err)
+        console.error('update user meter error ! ! !')
       }
       allPromise = []
     } else {

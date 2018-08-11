@@ -7,5 +7,10 @@
     "user": "root",
     "pwd": "root",
     "db": "home-info"
+  },
+  "interval": {
+    "user": 60,
+    "meter": 20,
+    "userMeter": 60
   }
 }
