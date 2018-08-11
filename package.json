@@ -7,7 +7,10 @@
     "axios": "^0.18.0",
     "config": "^1.29.2",
     "dotenv": "^4.0.0",
-    "moment": "^2.22.1"
+    "moment": "^2.22.1",
+    "mysql2": "^1.6.1",
+    "sequelize": "^4.38.0",
+    "sequelize-cli": "^4.0.0"
   },
   "scripts": {
     "test": "jest --forceExit",

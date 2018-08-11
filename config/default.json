@@ -1,3 +1,11 @@
 {
-  "baseUrl": "http://www.dzwyfwzx.com"
+  "infoUrl": "",
+  "maxUid": 1800,
+  "maxPromise": 50,
+  "mysql": {
+    "host": "127.0.0.1",
+    "user": "root",
+    "pwd": "root",
+    "db": "home-info"
+  }
 }
