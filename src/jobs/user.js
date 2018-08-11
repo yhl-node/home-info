@@ -22,7 +22,7 @@ async function start () {
       try {
         await Promise.all(allPromise)
       } catch (err) {
-        console.log(err)
+        // console.log(err)
       }
       allPromise = []
     } else {

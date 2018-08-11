@@ -1,11 +1,16 @@
 require('dotenv').config()
-const helper = require('./jobs/helper')
 const updateMeter = require('./jobs/meter')
 const updateUser = require('./jobs/user')
 const updateUserMeter = require('./jobs/user_meter')
 
-Promise.all([
-  updateUser(),
-  updateUserMeter(),
+setInterval(() => {
   updateMeter()
-]).then(() => { helper.db.close() })
+}, 30 * 60 * 1000)
+
+setInterval(() => {
+  updateUser()
+}, 60 * 60 * 1000)
+
+setInterval(() => {
+  updateUserMeter()
+}, 60 * 60 * 1000)

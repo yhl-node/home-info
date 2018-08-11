@@ -4,6 +4,7 @@ const Meter = require('../lib/meter')
 const helper = require('./helper')
 const MeterDB = require('../models/user_meters')(helper.db, Sequelize)
 const MeterInfoDB = require('../models/meters')(helper.db, Sequelize)
+const MeterLog = require('../models/meters_update_log')(helper.db, Sequelize)
 
 async function updateMeterInfo (mid) {
   console.log(`update meter: ${mid}`)
@@ -13,7 +14,10 @@ async function updateMeterInfo (mid) {
     meter.getMeterInfo()
   ])
   meterInfo && !meterInfo.lastReadTime && (meterInfo.lastReadTime = null)
-  await helper.updateOrCreate(MeterInfoDB, meterInfoDB, meterInfo)
+  await Promise.all([
+    helper.updateOrCreate(MeterInfoDB, meterInfoDB, meterInfo),
+    MeterLog.create(meterInfo)
+  ])
 }
 
 async function start () {
@@ -27,7 +31,7 @@ async function start () {
       try {
         await Promise.all(allPromise)
       } catch (err) {
-        console.log(err)
+        // console.log(err)
       }
       allPromise = []
     } else {
