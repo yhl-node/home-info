@@ -1,18 +1,16 @@
-var axios = require('axios')
-var config = require('config')
-const querystring = require('querystring')
+require('dotenv').config()
+const updateMeter = require('./jobs/meter')
+const updateUser = require('./jobs/user')
+const updateUserMeter = require('./jobs/user_meter')
 
-async function start () {
-  console.log(config.baseUrl)
-  let url = `${config.baseUrl}/Service/PhoneAPI.ashx`
-  let formData = {
-    action: 'getuser',
-    UserID: 1762,
-    MType: 'U',
-    time: 1501217123
-  }
-  let result = await axios.post(url, querystring.stringify(formData))
-  console.log(result.data)
-}
+setInterval(() => {
+  updateMeter()
+}, 30 * 60 * 1000)
 
-start()
+setInterval(() => {
+  updateUser()
+}, 60 * 60 * 1000)
+
+setInterval(() => {
+  updateUserMeter()
+}, 60 * 60 * 1000)

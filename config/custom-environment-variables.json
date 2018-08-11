@@ -1,3 +1,12 @@
 {
-  "baseUrl": "API_BASE_URL"
+  "infoUrl": "INFO_URL",
+  "maxUid": "MAX_UID",
+  "maxPromise": "MAX_PROMISE",
+  "mysql": {
+    "url": "MYSQL_URL",
+    "host": "MYSQL_HOST",
+    "user": "MYSQL_USER",
+    "pwd": "MYSQL_PWD",
+    "db": "MYSQL_DB"
+  }
 }
