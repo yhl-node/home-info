@@ -3,7 +3,6 @@ const updateMeter = require('./jobs/meter')
 const updateUser = require('./jobs/user')
 const updateUserMeter = require('./jobs/user_meter')
 
-updateMeter()
 setInterval(() => {
   console.log('updateMeter starting ................ ')
   updateMeter()
