@@ -1,3 +1,9 @@
+/*
+ * @Author: yhl, yhl@1024hw.org
+ * @Date: 2018-08-11 23:10:41
+ * @Last Modified by:   yhl
+ * @Last Modified time: 2018-08-11 23:10:41
+ */
 const config = require('config')
 const Sequelize = require('sequelize')
 const User = require('../lib/user')
@@ -5,13 +11,16 @@ const helper = require('./helper')
 const UserDB = require('../models/users')(helper.db, Sequelize)
 
 async function updateUser (uid) {
-  console.log(`update user: ${uid}`)
-  let user = new User(uid, config)
-  let [userInfo, userDB] = await Promise.all([
-    user.getUserInfo(),
-    UserDB.findOne({ where: { 'user_id': uid }, attributes: ['user_id'] })
-  ])
-  await helper.updateOrCreate(UserDB, userDB, userInfo, { 'user_id': uid })
+  try {
+    let user = new User(uid, config)
+    let [userInfo, userDB] = await Promise.all([
+      user.getUserInfo(),
+      UserDB.findOne({ where: { 'user_id': uid }, attributes: ['user_id'] })
+    ])
+    await helper.updateOrCreate(UserDB, userDB, userInfo, { 'user_id': uid })
+  } catch (error) {
+    console.error(`update user error: ${uid}`)
+  }
 }
 
 async function start () {
@@ -22,7 +31,7 @@ async function start () {
       try {
         await Promise.all(allPromise)
       } catch (err) {
-        // console.log(err)
+        console.error('update user error ! ! !')
       }
       allPromise = []
     } else {
