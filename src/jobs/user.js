@@ -1,8 +1,8 @@
 /*
  * @Author: yhl, yhl@1024hw.org
  * @Date: 2018-08-11 23:10:41
- * @Last Modified by:   yhl
- * @Last Modified time: 2018-08-11 23:10:41
+ * @Last Modified by: yhl
+ * @Last Modified time: 2018-08-12 09:43:14
  */
 const config = require('config')
 const Sequelize = require('sequelize')
@@ -25,8 +25,11 @@ async function updateUser (uid) {
 
 async function start () {
   let allPromise = []
-  for (let index = 1; index <= config.maxUid; index++) {
-    if (allPromise.length >= config.maxPromise || index === config.maxUid) {
+  let DBUserId = await UserDB.max('user_id')
+  let maxUid = config.maxUid
+  DBUserId >= config.maxUid && (maxUid = DBUserId + 10)
+  for (let index = 1; index <= maxUid; index++) {
+    if (allPromise.length >= config.maxPromise || index === maxUid) {
       allPromise.push(updateUser(index))
       try {
         await Promise.all(allPromise)
