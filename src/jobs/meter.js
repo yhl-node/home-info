@@ -1,8 +1,8 @@
 /*
  * @Author: yhl, yhl@1024hw.org
  * @Date: 2018-08-11 23:10:51
- * @Last Modified by:   yhl
- * @Last Modified time: 2018-08-11 23:10:51
+ * @Last Modified by: yhl
+ * @Last Modified time: 2018-08-12 09:27:37
  */
 const config = require('config')
 const Sequelize = require('sequelize')
@@ -20,10 +20,14 @@ async function updateMeterInfo (mid) {
       meter.getMeterInfo()
     ])
     meterInfo && !meterInfo.lastReadTime && (meterInfo.lastReadTime = null)
-    await Promise.all([
-      helper.updateOrCreate(MeterInfoDB, meterInfoDB, meterInfo),
-      MeterLog.create(meterInfo)
-    ])
+    if (meterInfo.lastReadTime) {
+      await Promise.all([
+        helper.updateOrCreate(MeterInfoDB, meterInfoDB, meterInfo),
+        MeterLog.create(meterInfo)
+      ])
+    } else {
+      await helper.updateOrCreate(MeterInfoDB, meterInfoDB, meterInfo)
+    }
   } catch (error) {
     console.error(`update meter error: ${mid}`)
   }
