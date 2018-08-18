@@ -2,11 +2,11 @@
  * @Author: yhl, yhl@1024hw.org
  * @Date: 2018-07-31 19:43:30
  * @Last Modified by: yhl
- * @Last Modified time: 2018-07-31 20:32:56
+ * @Last Modified time: 2018-08-18 16:31:12
  */
-const axios = require('axios')
-const querystring = require('querystring')
-const moment = require('moment')
+import axios from 'axios'
+import querystring from 'querystring'
+import moment from 'moment'
 
 class Meter {
   constructor (mid, config) {
@@ -24,4 +24,4 @@ class Meter {
   }
 }
 
-module.exports = Meter
+export default Meter

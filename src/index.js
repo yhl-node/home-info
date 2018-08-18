@@ -1,8 +1,7 @@
-require('dotenv').config()
-const config = require('config')
-const updateMeter = require('./jobs/meter')
-const updateUser = require('./jobs/user')
-const updateUserMeter = require('./jobs/user_meter')
+import config from 'config'
+import updateMeter from './jobs/meter'
+import updateUser from './jobs/user'
+import updateUserMeter from './jobs/user_meter'
 
 updateMeter()
 console.log(config)
