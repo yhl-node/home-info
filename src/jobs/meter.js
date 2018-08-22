@@ -2,15 +2,19 @@
  * @Author: yhl, yhl@1024hw.org
  * @Date: 2018-08-11 23:10:51
  * @Last Modified by: yhl
- * @Last Modified time: 2018-08-12 09:27:37
+ * @Last Modified time: 2018-08-18 17:07:11
  */
-const config = require('config')
-const Sequelize = require('sequelize')
-const Meter = require('../lib/meter')
-const helper = require('./helper')
-const MeterDB = require('../models/user_meters')(helper.db, Sequelize)
-const MeterInfoDB = require('../models/meters')(helper.db, Sequelize)
-const MeterLog = require('../models/meters_update_log')(helper.db, Sequelize)
+import config from 'config'
+import Sequelize from 'sequelize'
+import Meter from '../lib/meter'
+import helper from './helper'
+import UserMetersModel from '../models/user_meters'
+import MetersModel from '../models/meters'
+import MetersUpdateLogModel from '../models/meters_update_log'
+
+const MeterDB = UserMetersModel(helper.db, Sequelize)
+const MeterInfoDB = MetersModel(helper.db, Sequelize)
+const MeterLog = MetersUpdateLogModel(helper.db, Sequelize)
 
 async function updateMeterInfo (mid) {
   try {
@@ -53,4 +57,4 @@ async function start () {
   }
 }
 
-module.exports = start
+export default start

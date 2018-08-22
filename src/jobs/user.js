@@ -2,13 +2,15 @@
  * @Author: yhl, yhl@1024hw.org
  * @Date: 2018-08-11 23:10:41
  * @Last Modified by: yhl
- * @Last Modified time: 2018-08-12 09:43:14
+ * @Last Modified time: 2018-08-18 17:07:25
  */
-const config = require('config')
-const Sequelize = require('sequelize')
-const User = require('../lib/user')
-const helper = require('./helper')
-const UserDB = require('../models/users')(helper.db, Sequelize)
+import config from 'config'
+import Sequelize from 'sequelize'
+import User from '../lib/user'
+import helper from './helper'
+import UsersModel from '../models/users'
+
+const UserDB = UsersModel(helper.db, Sequelize)
 
 async function updateUser (uid) {
   try {
@@ -43,4 +45,4 @@ async function start () {
   }
 }
 
-module.exports = start
+export default start

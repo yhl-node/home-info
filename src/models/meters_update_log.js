@@ -1,6 +1,6 @@
 /* jshint indent: 2 */
 
-module.exports = function (sequelize, DataTypes) {
+function MetersUpdateLogModel (sequelize, DataTypes) {
   return sequelize.define('meters_update_log', {
     mid: {
       type: DataTypes.INTEGER(11),
@@ -64,3 +64,5 @@ module.exports = function (sequelize, DataTypes) {
     tableName: 'meters_update_log'
   })
 }
+
+export default MetersUpdateLogModel

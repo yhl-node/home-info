@@ -1,15 +1,16 @@
 /*
  * @Author: yhl, yhl@1024hw.org
  * @Date: 2018-08-11 23:10:47
- * @Last Modified by:   yhl
- * @Last Modified time: 2018-08-11 23:10:47
+ * @Last Modified by: yhl
+ * @Last Modified time: 2018-08-18 17:07:12
  */
-const config = require('config')
-const Sequelize = require('sequelize')
-const User = require('../lib/user')
-const helper = require('./helper')
-const MeterDB = require('../models/user_meters')(helper.db, Sequelize)
+import config from 'config'
+import Sequelize from 'sequelize'
+import User from '../lib/user'
+import helper from './helper'
+import UserMetersModel from '../models/user_meters'
 
+const MeterDB = UserMetersModel(helper.db, Sequelize)
 async function updateUserMeter (uid) {
   try {
     let user = new User(uid, config)
@@ -45,4 +46,4 @@ async function start () {
   }
 }
 
-module.exports = start
+export default start

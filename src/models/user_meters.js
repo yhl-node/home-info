@@ -1,6 +1,6 @@
 /* jshint indent: 2 */
 
-module.exports = function (sequelize, DataTypes) {
+function UserMetersModel (sequelize, DataTypes) {
   return sequelize.define('user_meters', {
     mid: {
       type: DataTypes.INTEGER(11),
@@ -39,3 +39,5 @@ module.exports = function (sequelize, DataTypes) {
     tableName: 'user_meters'
   })
 }
+
+export default UserMetersModel

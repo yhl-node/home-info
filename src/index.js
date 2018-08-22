@@ -1,8 +1,13 @@
-require('dotenv').config()
-const config = require('config')
-const updateMeter = require('./jobs/meter')
-const updateUser = require('./jobs/user')
-const updateUserMeter = require('./jobs/user_meter')
+/*
+ * @Author: yhl, yhl@1024hw.org
+ * @Date: 2018-08-18 17:23:34
+ * @Last Modified by:   yhl
+ * @Last Modified time: 2018-08-18 17:23:34
+ */
+import config from 'config'
+import updateMeter from './jobs/meter'
+import updateUser from './jobs/user'
+import updateUserMeter from './jobs/user_meter'
 
 updateMeter()
 console.log(config)

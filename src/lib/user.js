@@ -2,12 +2,12 @@
  * @Author: yhl, yhl@1024hw.org
  * @Date: 2018-07-31 20:29:33
  * @Last Modified by: yhl
- * @Last Modified time: 2018-07-31 20:43:01
+ * @Last Modified time: 2018-08-18 16:30:57
  */
 
-const axios = require('axios')
-const querystring = require('querystring')
-const moment = require('moment')
+import axios from 'axios'
+import querystring from 'querystring'
+import moment from 'moment'
 
 class User {
   constructor (uid, config) {
@@ -36,4 +36,4 @@ class User {
   }
 }
 
-module.exports = User
+export default User
