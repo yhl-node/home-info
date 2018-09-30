@@ -28,6 +28,10 @@ function MetersUpdateLogModel (sequelize, DataTypes) {
       type: DataTypes.DECIMAL,
       allowNull: true
     },
+    diffMeter: {
+      type: DataTypes.DECIMAL,
+      allowNull: true
+    },
     overdraftLimit: {
       type: DataTypes.INTEGER(4),
       allowNull: true

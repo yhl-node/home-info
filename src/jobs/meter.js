@@ -2,7 +2,7 @@
  * @Author: yhl, yhl@1024hw.org
  * @Date: 2018-08-11 23:10:51
  * @Last Modified by: yhl
- * @Last Modified time: 2018-08-18 17:07:11
+ * @Last Modified time: 2018-09-30 11:34:41
  */
 import config from 'config'
 import Sequelize from 'sequelize'
@@ -20,11 +20,14 @@ async function updateMeterInfo (mid) {
   try {
     let meter = new Meter(mid, config)
     let [meterInfoDB, meterInfo] = await Promise.all([
-      MeterInfoDB.findOne({where: {'mid': mid}, attributes: ['mid']}),
+      MeterInfoDB.findOne({ where: { 'mid': mid }, attributes: ['mid', 'meterValue'] }),
       meter.getMeterInfo()
     ])
     meterInfo && !meterInfo.lastReadTime && (meterInfo.lastReadTime = null)
     if (meterInfo.lastReadTime) {
+      meterInfo = Object.assign(meterInfo, {
+        diffMeter: meterInfo.meterValue - meterInfoDB.meterValue
+      })
       await Promise.all([
         helper.updateOrCreate(MeterInfoDB, meterInfoDB, meterInfo),
         MeterLog.create(meterInfo)
