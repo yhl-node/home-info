@@ -15,9 +15,10 @@
   "scripts": {
     "test": "jest --forceExit",
     "lint": "eslint src",
+    "db-init": "sequelize db:migrate",
     "lint-fix": "eslint --fix src",
     "dev": "hotnode -r esm -r dotenv/config src/index.js",
-    "start": "node -r esm src/index.js"
+    "start": "sequelize db:migrate && node -r esm src/index.js"
   },
   "standard": {
     "env": [
