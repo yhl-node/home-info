@@ -3,7 +3,6 @@
   "maxUid": "MAX_UID",
   "maxPromise": "MAX_PROMISE",
   "mysql": {
-    "url": "MYSQL_URL",
     "host": "MYSQL_HOST",
     "user": "MYSQL_USER",
     "pwd": "MYSQL_PWD",

@@ -2,7 +2,7 @@
  * @Author: yhl, yhl@1024hw.org
  * @Date: 2018-08-11 23:10:51
  * @Last Modified by: yhl
- * @Last Modified time: 2018-09-30 11:34:41
+ * @Last Modified time: 2018-10-18 20:22:48
  */
 import config from 'config'
 import Sequelize from 'sequelize'
@@ -24,7 +24,7 @@ async function updateMeterInfo (mid) {
       meter.getMeterInfo()
     ])
     meterInfo && !meterInfo.lastReadTime && (meterInfo.lastReadTime = null)
-    if (meterInfo.lastReadTime) {
+    if (meterInfo.lastReadTime && meterInfoDB) {
       meterInfo = Object.assign(meterInfo, {
         diffMeter: meterInfo.meterValue - meterInfoDB.meterValue
       })
