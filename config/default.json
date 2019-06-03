@@ -11,6 +11,7 @@
   "interval": {
     "user": 60,
     "meter": 20,
-    "userMeter": 60
+    "userMeter": 60,
+    "charge": 60
   }
 }
