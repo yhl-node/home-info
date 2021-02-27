@@ -2,7 +2,7 @@
  * @Author: yhl, yhl@1024hw.org
  * @Date: 2018-08-11 23:10:47
  * @Last Modified by: yhl
- * @Last Modified time: 2018-08-18 17:07:12
+ * @Last Modified time: 2021-02-27 22:49:03
  */
 import config from 'config'
 import Sequelize from 'sequelize'
@@ -13,13 +13,13 @@ import UserMetersModel from '../models/user_meters'
 const MeterDB = UserMetersModel(helper.db, Sequelize)
 async function updateUserMeter (uid) {
   try {
-    let user = new User(uid, config)
-    let userMeters = await user.getUserMeter()
+    const user = new User(uid, config)
+    const userMeters = await user.getUserMeter()
     if (userMeters) {
       for (let index = 0; index < userMeters.length; index++) {
         const userMeter = userMeters[index]
-        let meterDB = await MeterDB.findOne({ where: { 'mid': userMeter.mid }, attributes: ['mid'] })
-        await helper.updateOrCreate(MeterDB, meterDB, userMeter, {'user_id': uid})
+        const meterDB = await MeterDB.findOne({ where: { mid: userMeter.mid }, attributes: ['mid'] })
+        await helper.updateOrCreate(MeterDB, meterDB, userMeter, { user_id: uid })
       }
     }
   } catch (error) {
@@ -28,10 +28,10 @@ async function updateUserMeter (uid) {
 }
 
 async function start () {
-  let len = config.maxUid
+  const len = config.maxUid
   let allPromise = []
   for (let index = 1; index <= len; index++) {
-    let uid = index
+    const uid = index
     if (allPromise.length >= config.maxPromise || index === len) {
       allPromise.push(updateUserMeter(uid))
       try {

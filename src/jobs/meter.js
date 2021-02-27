@@ -2,7 +2,7 @@
  * @Author: yhl, yhl@1024hw.org
  * @Date: 2018-08-11 23:10:51
  * @Last Modified by: yhl
- * @Last Modified time: 2018-10-18 20:22:48
+ * @Last Modified time: 2021-02-27 22:48:57
  */
 import config from 'config'
 import Sequelize from 'sequelize'
@@ -18,9 +18,9 @@ const MeterLog = MetersUpdateLogModel(helper.db, Sequelize)
 
 async function updateMeterInfo (mid) {
   try {
-    let meter = new Meter(mid, config)
+    const meter = new Meter(mid, config)
     let [meterInfoDB, meterInfo] = await Promise.all([
-      MeterInfoDB.findOne({ where: { 'mid': mid }, attributes: ['mid', 'meterValue'] }),
+      MeterInfoDB.findOne({ where: { mid: mid }, attributes: ['mid', 'meterValue'] }),
       meter.getMeterInfo()
     ])
     meterInfo && !meterInfo.lastReadTime && (meterInfo.lastReadTime = null)
@@ -41,11 +41,11 @@ async function updateMeterInfo (mid) {
 }
 
 async function start () {
-  let allMeter = await MeterDB.findAll({ attributes: ['mid'] })
-  let len = allMeter.length
+  const allMeter = await MeterDB.findAll({ attributes: ['mid'] })
+  const len = allMeter.length
   let allPromise = []
   for (let index = 1; index <= len; index++) {
-    let mid = allMeter[index - 1].mid
+    const mid = allMeter[index - 1].mid
     if (allPromise.length >= config.maxPromise || index === len) {
       allPromise.push(updateMeterInfo(mid))
       try {
