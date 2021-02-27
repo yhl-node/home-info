@@ -15,7 +15,6 @@ RUN yarn --prod && \
   cp /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && \
   echo "${TIMEZONE}" > /etc/timezone && \
   apk del tzdata && \
-  apk clean cache && \
   rm -rf /var/cache/apk/*
 
 CMD [ "yarn", "start" ]
