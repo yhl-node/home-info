@@ -1,5 +1,5 @@
 /* jshint indent: 2 */
-import { Sequelize, DataTypes as DataType } from 'sequelize';
+import { Sequelize, DataTypes as DataType } from 'sequelize'
 
 function UsersModel (sequelize: Sequelize, DataTypes: typeof DataType) {
   return sequelize.define('users', {

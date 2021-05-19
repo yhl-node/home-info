@@ -1,16 +1,14 @@
 /* jshint indent: 2 */
-import { Sequelize, ModelDefined, Optional, DataTypes as DataType } from 'sequelize';
+import { Sequelize, Model, DataTypes as DataType } from 'sequelize'
 
-interface Attributes {
+interface Attributes extends Model{
   mid: number;
   balanceAmount: number;
   meterValue: number
 }
 
-interface CreationAttributes extends Optional<Attributes, 'mid' | 'balanceAmount' | 'meterValue'> {};
-
 function UserMetersModel (sequelize: Sequelize, DataTypes: typeof DataType) {
-  const model: ModelDefined<Attributes, CreationAttributes> = sequelize.define('user_meters', {
+  return sequelize.define<Attributes>('user_meters', {
     mid: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -33,7 +31,7 @@ function UserMetersModel (sequelize: Sequelize, DataTypes: typeof DataType) {
       allowNull: true
     },
     onlineflag: {
-      type: DataTypes.INTEGER({length: 4}),
+      type: DataTypes.INTEGER({ length: 4 }),
       allowNull: true
     },
     price: {
@@ -47,7 +45,6 @@ function UserMetersModel (sequelize: Sequelize, DataTypes: typeof DataType) {
   }, {
     tableName: 'user_meters'
   })
-  return model
 }
 
 export default UserMetersModel

@@ -1,5 +1,5 @@
 /* jshint indent: 2 */
-import { Sequelize, DataTypes as DataType } from 'sequelize';
+import { Sequelize, DataTypes as DataType } from 'sequelize'
 
 function MetersUpdateLogModel (sequelize: Sequelize, DataTypes: typeof DataType) {
   return sequelize.define('meters_update_log', {
@@ -34,11 +34,11 @@ function MetersUpdateLogModel (sequelize: Sequelize, DataTypes: typeof DataType)
       allowNull: true
     },
     overdraftLimit: {
-      type: DataTypes.INTEGER({length: 4}),
+      type: DataTypes.INTEGER({ length: 4 }),
       allowNull: true
     },
     overdraftMoney: {
-      type: DataTypes.INTEGER({length: 4}),
+      type: DataTypes.INTEGER({ length: 4 }),
       allowNull: true
     },
     rKV: {

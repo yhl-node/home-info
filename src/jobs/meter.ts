@@ -2,7 +2,7 @@
  * @Author: yhl, yhl@1024hw.org
  * @Date: 2018-08-11 23:10:51
  * @Last Modified by: yhl
- * @Last Modified time: 2021-05-14 16:40:00
+ * @Last Modified time: 2021-05-19 12:10:53
  */
 import config from 'config'
 import Sequelize from 'sequelize'
@@ -16,7 +16,7 @@ const MeterDB = UserMetersModel(helper.db, Sequelize.DataTypes)
 const MeterInfoDB = MetersModel(helper.db, Sequelize)
 const MeterLog = MetersUpdateLogModel(helper.db, Sequelize)
 
-async function updateMeterInfo (mid: string) {
+async function updateMeterInfo (mid: number) {
   try {
     const meter = new Meter(mid, config)
     let [meterInfoDB, meterInfo] = await Promise.all([

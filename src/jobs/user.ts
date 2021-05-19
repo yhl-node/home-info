@@ -2,7 +2,7 @@
  * @Author: yhl, yhl@1024hw.org
  * @Date: 2018-08-11 23:10:41
  * @Last Modified by: yhl
- * @Last Modified time: 2021-05-14 16:40:19
+ * @Last Modified time: 2021-05-19 14:12:53
  */
 import config from 'config'
 import Sequelize from 'sequelize'
@@ -29,7 +29,7 @@ async function start () {
   let allPromise = []
   const DBUserId = await UserDB.max('user_id')
   let maxUid = Number(config.get('maxUid'))
-  DBUserId >= maxUid && (maxUid = DBUserId + 10)
+  Number(DBUserId) >= maxUid && (maxUid = Number(DBUserId) + 10)
 
   const maxLen = Number(config.get('maxPromise'))
   for (let index = 1; index <= maxUid; index++) {

@@ -1,10 +1,13 @@
 {
+  "standard.autoFixOnSave": true,
+  "standard.engine": "standardx",
   "cSpell.words": [
     "getmeteractinfo",
     "getuser",
     "hotnode",
     "installtime",
     "meternumber",
-    "onlineflag"
+    "onlineflag",
+    "standardx"
   ]
 }

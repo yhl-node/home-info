@@ -2,24 +2,18 @@
  * @Author: yhl, yhl@1024hw.org
  * @Date: 2018-08-11 23:10:51
  * @Last Modified by: yhl
- * @Last Modified time: 2021-05-14 16:31:21
+ * @Last Modified time: 2021-05-19 14:29:13
  */
 import config from 'config'
-import Sequelize from 'sequelize'
 import Meter from '../lib/meter'
-import helper from './helper'
-import UserMetersModel from '../models/user_meters'
-import MetersChargeLogModel from '../models/meters_charge_log'
+import db from '../models'
 
-const MeterDB = UserMetersModel(helper.db, Sequelize)
-const MeterChargeLog = MetersChargeLogModel(helper.db, Sequelize)
-
-async function updateMeterInfo (mid: string) {
+async function updateMeterInfo (mid: number) {
   try {
     const meter = new Meter(mid, config)
     const meterInfo = await meter.getChargeInfo()
     if (meterInfo) {
-      await Promise.all(meterInfo.map((meterInfo: any) => MeterChargeLog.create(Object.assign(meterInfo, { meter_id: mid }))))
+      await Promise.all(meterInfo.map((meterInfo: any) => db.models.meterChargeLog.create(Object.assign(meterInfo, { meter_id: mid }))))
     }
   } catch (error) {
     console.error(`update meter error: ${mid}`)

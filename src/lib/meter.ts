@@ -2,17 +2,17 @@
  * @Author: yhl, yhl@1024hw.org
  * @Date: 2018-07-31 19:43:30
  * @Last Modified by: yhl
- * @Last Modified time: 2021-05-14 16:14:21
+ * @Last Modified time: 2021-05-19 12:11:15
  */
 import axios from 'axios'
 import querystring from 'querystring'
 import moment from 'moment'
 
 class Meter {
-  mid: string
+  mid: number
   apiUrl: string
 
-  constructor (mid: string, config: any) {
+  constructor (mid: number, config: any) {
     this.mid = mid
     this.apiUrl = `${config.infoUrl}`
   }
