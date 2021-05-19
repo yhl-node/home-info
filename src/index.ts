@@ -2,7 +2,7 @@
  * @Author: yhl, yhl@1024hw.org
  * @Date: 2018-08-18 17:23:34
  * @Last Modified by: yhl
- * @Last Modified time: 2018-08-25 15:10:35
+ * @Last Modified time: 2021-05-14 16:28:14
  */
 import config from 'config'
 import updateMeter from './jobs/meter'
@@ -12,26 +12,28 @@ import updateCharge from './jobs/charge'
 
 updateMeter()
 console.log(config)
+
+const interval = Number(config.get('interval.meter'))
 setInterval(() => {
   console.log('updateMeter starting ................ ')
   updateMeter()
   console.log('updateMeter ending ................ ')
-}, config.interval.meter * 60 * 1000)
+}, interval * 60 * 1000)
 
 setInterval(() => {
   console.log('updateUser starting ................ ')
   updateCharge()
   console.log('updateUser ending ................ ')
-}, config.interval.charge * 60 * 1000)
+}, interval * 60 * 1000)
 
 setInterval(() => {
   console.log('updateUser starting ................ ')
   updateUser()
   console.log('updateUser ending ................ ')
-}, config.interval.user * 60 * 1000)
+}, interval * 60 * 1000)
 
 setInterval(() => {
   console.log('updateUserMeter starting ................ ')
   updateUserMeter()
   console.log('updateUserMeter ending ................ ')
-}, config.interval.userMeter * 60 * 1000)
+}, interval * 60 * 1000)

@@ -2,7 +2,7 @@
  * @Author: yhl, yhl@1024hw.org
  * @Date: 2018-07-31 20:29:33
  * @Last Modified by: yhl
- * @Last Modified time: 2021-02-27 22:49:22
+ * @Last Modified time: 2021-05-14 16:15:37
  */
 
 import axios from 'axios'
@@ -10,7 +10,11 @@ import querystring from 'querystring'
 import moment from 'moment'
 
 class User {
-  constructor (uid, config) {
+  uid: number
+  apiUrl: string
+  postData: { UserID: number, MType: string, time: number }
+
+  constructor (uid: number, config: any) {
     this.uid = uid
     this.apiUrl = `${config.infoUrl}`
     this.postData = {

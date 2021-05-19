@@ -6,7 +6,7 @@ LICENSE
 VERSION
 spec
 coverage
-tests
+test
 Dockerfile
 jest.config.js
 spec

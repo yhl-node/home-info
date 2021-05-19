@@ -1,9 +1,10 @@
 /* jshint indent: 2 */
+import { Sequelize, DataTypes as DataType } from 'sequelize';
 
-function UsersModel (sequelize, DataTypes) {
+function UsersModel (sequelize: Sequelize, DataTypes: typeof DataType) {
   return sequelize.define('users', {
     user_id: {
-      type: DataTypes.INTEGER(11),
+      type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
@@ -12,7 +13,7 @@ function UsersModel (sequelize, DataTypes) {
       allowNull: true
     },
     iD: {
-      type: DataTypes.INTEGER(11),
+      type: DataTypes.INTEGER,
       allowNull: true
     },
     password: {

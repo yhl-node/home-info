@@ -2,7 +2,7 @@
  * @Author: yhl, yhl@1024hw.org
  * @Date: 2018-08-11 23:10:41
  * @Last Modified by: yhl
- * @Last Modified time: 2021-02-27 22:49:07
+ * @Last Modified time: 2021-05-14 16:40:19
  */
 import config from 'config'
 import Sequelize from 'sequelize'
@@ -12,7 +12,7 @@ import UsersModel from '../models/users'
 
 const UserDB = UsersModel(helper.db, Sequelize)
 
-async function updateUser (uid) {
+async function updateUser (uid: number) {
   try {
     const user = new User(uid, config)
     const [userInfo, userDB] = await Promise.all([
@@ -28,10 +28,12 @@ async function updateUser (uid) {
 async function start () {
   let allPromise = []
   const DBUserId = await UserDB.max('user_id')
-  let maxUid = config.maxUid
-  DBUserId >= config.maxUid && (maxUid = DBUserId + 10)
+  let maxUid = Number(config.get('maxUid'))
+  DBUserId >= maxUid && (maxUid = DBUserId + 10)
+
+  const maxLen = Number(config.get('maxPromise'))
   for (let index = 1; index <= maxUid; index++) {
-    if (allPromise.length >= config.maxPromise || index === maxUid) {
+    if (allPromise.length >= maxLen || index === maxUid) {
       allPromise.push(updateUser(index))
       try {
         await Promise.all(allPromise)

@@ -1,14 +1,15 @@
 /* jshint indent: 2 */
+import { Sequelize, ModelDefined, DataTypes as DataType } from 'sequelize';
 
-function MetersChargeLogModel (sequelize, DataTypes) {
+function MetersChargeLogModel (sequelize: Sequelize, DataTypes: typeof DataType) {
   return sequelize.define('meters_charge_log', {
     mid: {
-      type: DataTypes.INTEGER(11),
+      type: DataTypes.INTEGER,
       primaryKey: true,
       allowNull: false
     },
     meter_id: {
-      type: DataTypes.INTEGER(11),
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     amount: {

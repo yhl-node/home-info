@@ -2,7 +2,7 @@
  * @Author: yhl, yhl@1024hw.org
  * @Date: 2018-08-11 23:10:47
  * @Last Modified by: yhl
- * @Last Modified time: 2021-02-27 22:49:03
+ * @Last Modified time: 2021-05-14 16:12:32
  */
 import config from 'config'
 import Sequelize from 'sequelize'
@@ -11,7 +11,7 @@ import helper from './helper'
 import UserMetersModel from '../models/user_meters'
 
 const MeterDB = UserMetersModel(helper.db, Sequelize)
-async function updateUserMeter (uid) {
+async function updateUserMeter (uid: number) {
   try {
     const user = new User(uid, config)
     const userMeters = await user.getUserMeter()
@@ -28,11 +28,12 @@ async function updateUserMeter (uid) {
 }
 
 async function start () {
-  const len = config.maxUid
+  const len = Number(config.get('maxUid'))
   let allPromise = []
   for (let index = 1; index <= len; index++) {
     const uid = index
-    if (allPromise.length >= config.maxPromise || index === len) {
+    const maxLen = Number(config.get('maxPromise'))
+    if (allPromise.length >= maxLen || index === len) {
       allPromise.push(updateUserMeter(uid))
       try {
         await Promise.all(allPromise)

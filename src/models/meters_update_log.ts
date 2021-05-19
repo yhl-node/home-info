@@ -1,11 +1,12 @@
 /* jshint indent: 2 */
+import { Sequelize, DataTypes as DataType } from 'sequelize';
 
-function MetersModel (sequelize, DataTypes) {
-  return sequelize.define('meters', {
+function MetersUpdateLogModel (sequelize: Sequelize, DataTypes: typeof DataType) {
+  return sequelize.define('meters_update_log', {
     mid: {
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-      primaryKey: true
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      allowNull: false
     },
     balanceAmount: {
       type: DataTypes.DECIMAL,
@@ -13,7 +14,7 @@ function MetersModel (sequelize, DataTypes) {
       defaultValue: '0.000'
     },
     hoardingLimit: {
-      type: DataTypes.INTEGER(11),
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     lastMonth: {
@@ -28,20 +29,24 @@ function MetersModel (sequelize, DataTypes) {
       type: DataTypes.DECIMAL,
       allowNull: true
     },
+    diffMeter: {
+      type: DataTypes.DECIMAL,
+      allowNull: true
+    },
     overdraftLimit: {
-      type: DataTypes.INTEGER(4),
+      type: DataTypes.INTEGER({length: 4}),
       allowNull: true
     },
     overdraftMoney: {
-      type: DataTypes.INTEGER(4),
+      type: DataTypes.INTEGER({length: 4}),
       allowNull: true
     },
     rKV: {
-      type: DataTypes.INTEGER(11),
+      type: DataTypes.INTEGER,
       allowNull: true
     },
     rMA: {
-      type: DataTypes.INTEGER(11),
+      type: DataTypes.INTEGER,
       allowNull: true
     },
     rPrice: {
@@ -61,8 +66,8 @@ function MetersModel (sequelize, DataTypes) {
       allowNull: true
     }
   }, {
-    tableName: 'meters'
+    tableName: 'meters_update_log'
   })
 }
 
-export default MetersModel
+export default MetersUpdateLogModel
