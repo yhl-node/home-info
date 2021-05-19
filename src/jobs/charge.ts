@@ -13,7 +13,7 @@ async function updateMeterInfo (mid: number) {
     const meter = new Meter(mid, config)
     const meterInfo = await meter.getChargeInfo()
     if (meterInfo) {
-      await Promise.all(meterInfo.map((meterInfo: any) => db.models.meterChargeLog.create(Object.assign(meterInfo, { meter_id: mid }))))
+      await Promise.all(meterInfo.map((meterInfo: any) => db.models.MeterChargeLog.create(Object.assign(meterInfo, { meter_id: mid }))))
     }
   } catch (error) {
     console.error(`update meter error: ${mid}`)
@@ -21,7 +21,7 @@ async function updateMeterInfo (mid: number) {
 }
 
 async function start () {
-  const allMeter = await MeterDB.findAll({ attributes: ['mid'] })
+  const allMeter = await db.models.Meter.findAll({ attributes: ['mid'] })
   const len = allMeter.length
   let allPromise = []
   for (let index = 1; index <= len; index++) {

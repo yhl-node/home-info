@@ -18,11 +18,11 @@ const sequelize = new Sequelize({
 })
 
 const models = {
-  user: userDefine(sequelize, DataTypes),
-  meterChargeLog: meterChargeLogDefine(sequelize, DataTypes),
-  meterUpdateLog: meterUpdateLogDefine(sequelize, DataTypes),
-  meter: meterDefine(sequelize, DataTypes),
-  userMeter: userMeterDefine(sequelize, DataTypes)
+  User: userDefine(sequelize, DataTypes),
+  MeterChargeLog: meterChargeLogDefine(sequelize, DataTypes),
+  MeterUpdateLog: meterUpdateLogDefine(sequelize, DataTypes),
+  Meter: meterDefine(sequelize, DataTypes),
+  UserMeter: userMeterDefine(sequelize, DataTypes)
 }
 
 export default { sequelize, models }
